@@ -11,19 +11,16 @@ class MinimaxPlayer: public Player {
     public: 
         pair<int, int> move(const Board &board, const int &whichPlayer) {
             pair <int, int> cell;
-            Move bestMove = findBestMove(board, 1);
-            if (bestMove.row == -1) {
-                if (isMovesLeft(board)) {
-                    for (int i = 0; i < board.getNumRow(); ++i)
-                        for (int j = 0; j < board.getNumCol(); ++j)
-                            if (board.getCell(i, j) == CELL_EMPTY) {
-                                cell.first = i; 
-                                cell.second = j;
-                                return cell;
-                            }
-                }
-
-            }
+            int nRow = board.getNumRow();
+            int nCol = board.getNumCol();
+            Board newBoard(nRow, nCol, 3);
+            for (int i = 0; i < nRow; ++i) 
+                for (int j = 0; j < nCol; ++j) 
+                    if (board.getCell(i, j) == whichPlayer)
+                        newBoard.setCell(i, j, 1);
+                    else if (board.getCell(i, j) != CELL_EMPTY)
+                        newBoard.setCell(i, j, 2);
+            Move bestMove = findBestMove(newBoard, 1);
             cell.first = bestMove.row; 
             cell.second = bestMove.col;
             return cell;
@@ -239,7 +236,7 @@ class MinimaxPlayer: public Player {
 //     { 
 //         { -1, 1, 2}, 
 //         { -1, 1, 1 }, 
-//         { 2, -1, 2 } 
+//         { -1, 2, 2 } 
 //     }; 
 //     Board board(3, 3, 3);
 //     for (int i = 0; i < 3; ++i) 
@@ -252,5 +249,5 @@ class MinimaxPlayer: public Player {
 //     printf("The Optimal Move is :\n"); 
 //     printf("ROW: %d COL: %d\n\n", bestMove.first, 
 //                                   bestMove.second ); 
-//     return 0; 
+//     return 0;
 // }
