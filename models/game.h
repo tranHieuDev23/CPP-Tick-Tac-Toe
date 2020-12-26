@@ -50,6 +50,16 @@ public:
     {
         return board.getWinnerId();
     }
+
+    const int getPlayerCount() const
+    {
+        return players.size();
+    }
+
+    const int getCurrentPlayerId() const
+    {
+        return currentTurn;
+    }
 };
 
 #endif
