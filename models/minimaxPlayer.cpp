@@ -201,30 +201,21 @@ class MinimaxPlayer: public Player {
             Move bestMove; 
             bestMove.row = -1; 
             bestMove.col = -1; 
-        
-            // Traverse all cells, evaluate minimax function for 
-            // all empty cells. And return the cell with optimal 
-            // value. 
+         
             for (int i = 0; i < nRow; i++) 
             { 
                 for (int j = 0; j < nCol; j++) 
                 { 
-                    // Check if cell is empty 
+
                     if (board.getCell(i, j) == CELL_EMPTY) 
                     { 
-                        // Make the move 
+
                         board.setCell(i, j, whichPlayer);
-        
-                        // compute evaluation function for this 
-                        // move. 
+         
                         int moveVal = minimax(board, 0, whichPlayer + 1); 
         
-                        // Undo the move 
                         board.setCell(i, j, CELL_EMPTY);
         
-                        // If the value of the current move is 
-                        // more than the best value, then update 
-                        // best/ 
                         if (moveVal > bestVal) 
                         { 
                             bestMove.row = i; 
